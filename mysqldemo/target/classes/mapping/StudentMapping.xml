@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mysqldemo.mapper.StudentMapper">
+
+    <sql id="commonColumn">
+        id,
+        name,
+        email
+    </sql>
+
+    <sql id="commonWhere">
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="email != null">
+                and email = #{email}
+            </if>
+        </where>
+    </sql>
+
+    <!--查询 -->
+    <select id="selectList" parameterType="com.example.mysqldemo.entity.Student" resultType="com.example.mysqldemo.entity.Student">
+        select
+        <include refid="commonColumn"/>
+        from student
+        <include refid="commonWhere"/>
+    </select>
+
+</mapper>
